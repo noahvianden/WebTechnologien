@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import PlayerModel from '../models/playerModel'; 
+import PlayerModel, { Resource } from '../models/playerModel'; 
 
 export const createPlayer = async (req: Request, res: Response) => {
     try {
@@ -95,19 +95,23 @@ export const updatePlayerPosition = async (req: Request, res: Response) => {
 export const tradeResources = async (req: Request, res: Response) => {
     try {
         const { fromPlayerId, toPlayerId, resourcesOffered, resourcesRequested } = req.body;
-        // Logik zum Überprüfen der Gültigkeit des Handels hier einfügen
+        // Assuming resourcesOffered and resourcesRequested are arrays of Resource objects
 
-        // Ressourcen von fromPlayer abziehen
-        await PlayerModel.findByIdAndUpdate(fromPlayerId, { $inc: { resources: resourcesOffered.map(resource => -resource.amount) } });
-        // Ressourcen zu toPlayer hinzufügen
-        await PlayerModel.findByIdAndUpdate(toPlayerId, { $inc: { resources: resourcesRequested.map(resource => resource.amount) } });
+        // Subtract resources from fromPlayer
+        await PlayerModel.findByIdAndUpdate(fromPlayerId, {
+            $inc: { resources: resourcesOffered.map((resource: Resource) => -resource.amount) }
+        });
+
+        // Add resources to toPlayer
+        await PlayerModel.findByIdAndUpdate(toPlayerId, {
+            $inc: { resources: resourcesRequested.map((resource: Resource) => resource.amount) }
+        });
 
         res.status(200).json({ message: 'Handel erfolgreich.' });
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }
 };
-
 export const updateDevelopmentCards = async (req: Request, res: Response) => {
     try {
         const { developmentCards } = req.body; // Nehmen Sie an, dass die Entwicklungs-Karten im Body gesendet werden

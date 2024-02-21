@@ -9,6 +9,10 @@ interface IRoad {
   position: { start: { x: number; y: number }, end: { x: number; y: number } };
 }
 
+export interface Resource {
+  amount: number;
+}
+
 export interface IPlayer extends Document {
   name: string;
   color: string;

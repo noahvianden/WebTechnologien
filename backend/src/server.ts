@@ -60,11 +60,6 @@ app.use(helmet()); // Helps secure your app by setting various HTTP headers.
 app.use(express.json());
 app.use('/api', playerRoutes);
 
-// Define a simple route for the root URL. This is just a basic example to get started.
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, World!');
-});
-
 // Start the server on the defined PORT. This will listen for incoming requests.
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
