@@ -1,4 +1,6 @@
 import express, { Request, Response } from 'express';
+import WebSocket from 'ws';
+import * as http from 'http';
 import session from 'express-session';
 import passport from 'passport';
 import mongoose from 'mongoose';
@@ -9,6 +11,29 @@ import playerRoutes from './routes/playerRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const server = http.createServer(app); // `app` ist Ihre Express-Anwendung
+const wss = new WebSocket.Server({ server });
+
+wss.on('connection', (ws) => {
+  console.log('Neuer Client verbunden');
+
+  ws.on('message', (data) => {
+      console.log('Nachricht vom Client:', data);
+      // Verarbeiten der Nachricht und Aktualisieren des Spielstands
+
+      // Beispiel: Senden einer Nachricht an alle verbundenen Clients
+      wss.clients.forEach(function each(client) {
+          if (client.readyState === WebSocket.OPEN) {
+              client.send('Spielstand aktualisiert');
+          }
+      });
+  });
+
+  ws.on('close', () => {
+      console.log('Client hat die Verbindung getrennt');
+  });
+});
+
 
 // Set up MongoDB connection. Here, we're connecting to a local MongoDB instance
 // using a database named 'catan'.
@@ -32,6 +57,7 @@ app.use(passport.session());
 app.use(cors()); // Allows or restricts requested resources on a web server based on the request's origin.
 app.use(helmet()); // Helps secure your app by setting various HTTP headers.
 
+app.use(express.json());
 app.use('/api', playerRoutes);
 
 // Define a simple route for the root URL. This is just a basic example to get started.

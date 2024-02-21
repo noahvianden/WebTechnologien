@@ -12,6 +12,41 @@ export const createPlayer = async (req: Request, res: Response) => {
     }
 };
 
+// Aktualisieren eines Spielers
+export const updatePlayer = async (req: Request, res: Response) => {
+    try {
+        const { playerId } = req.params;
+        const update = req.body;
+        const updatedPlayer = await PlayerModel.findByIdAndUpdate(playerId, update, { new: true });
+        res.status(200).json(updatedPlayer);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Löschen eines Spielers
+export const deletePlayer = async (req: Request, res: Response) => {
+    try {
+        const { playerId } = req.params;
+        await PlayerModel.findByIdAndDelete(playerId);
+        res.status(200).json({ message: 'Spieler erfolgreich gelöscht' });
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getPlayerById = async (req: Request, res: Response) => {
+    try {
+        const player = await PlayerModel.findById(req.params.playerId);
+        if (!player) {
+            return res.status(404).json({ message: 'Spieler nicht gefunden.' });
+        }
+        res.status(200).json(player);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 export const getAllPlayers = async (req: Request, res: Response) => {
     try {
         const players = await PlayerModel.find();
@@ -20,3 +55,70 @@ export const getAllPlayers = async (req: Request, res: Response) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// Aktualisieren der Ressourcen eines Spielers
+export const updatePlayerResources = async (req: Request, res: Response) => {
+    const { playerId } = req.params;
+    const { resources } = req.body;
+    try {
+        const player = await PlayerModel.findById(playerId);
+        if (!player) {
+            return res.status(404).json({ message: 'Spieler nicht gefunden' });
+        }
+
+        player.resources.brick += resources.brick;
+        player.resources.wood += resources.wood;
+        player.resources.wheat += resources.wheat;
+        player.resources.sheep += resources.sheep;
+        player.resources.ore += resources.ore;
+
+        await player.save();
+        res.status(200).json(player);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const updatePlayerPosition = async (req: Request, res: Response) => {
+    try {
+        const { positions } = req.body; // Nehmen Sie an, dass die Positionen im Body gesendet werden
+        const player = await PlayerModel.findByIdAndUpdate(req.params.playerId, { $set: { positions } }, { new: true });
+        if (!player) {
+            return res.status(404).json({ message: 'Spieler nicht gefunden.' });
+        }
+        res.status(200).json(player);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const tradeResources = async (req: Request, res: Response) => {
+    try {
+        const { fromPlayerId, toPlayerId, resourcesOffered, resourcesRequested } = req.body;
+        // Logik zum Überprüfen der Gültigkeit des Handels hier einfügen
+
+        // Ressourcen von fromPlayer abziehen
+        await PlayerModel.findByIdAndUpdate(fromPlayerId, { $inc: { resources: resourcesOffered.map(resource => -resource.amount) } });
+        // Ressourcen zu toPlayer hinzufügen
+        await PlayerModel.findByIdAndUpdate(toPlayerId, { $inc: { resources: resourcesRequested.map(resource => resource.amount) } });
+
+        res.status(200).json({ message: 'Handel erfolgreich.' });
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const updateDevelopmentCards = async (req: Request, res: Response) => {
+    try {
+        const { developmentCards } = req.body; // Nehmen Sie an, dass die Entwicklungs-Karten im Body gesendet werden
+        const player = await PlayerModel.findByIdAndUpdate(req.params.playerId, { $set: { developmentCards } }, { new: true });
+        if (!player) {
+            return res.status(404).json({ message: 'Spieler nicht gefunden.' });
+        }
+        res.status(200).json(player);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
