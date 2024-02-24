@@ -96,32 +96,32 @@
 
 /* Stil für die verschiedenen Ressourcentypen */
 .mountain {
-  background-image: url('C:/Users/noahv/Downloads/mountain.png');
+  background-image: url('../assets/mountain.png');
   background-size: cover;
 }
 
 .pasture {
-  background-image: url('C:/Users/noahv/Downloads/pasture.png');
+  background-image: url('../assets/pasture.png');
   background-size: cover;
 }
 
 .forest {
-  background-image: url('C:/Users/noahv/Downloads/forest.png');
+  background-image: url('../assets/forest.png');
   background-size: cover;
 }
 
 .field {
-  background-image: url('C:/Users/noahv/Downloads/field.png');
+  background-image: url('../assets/field.png');
   background-size: cover;
 }
 
 .hill {
-  background-image: url('C:/Users/noahv/Downloads/hill.png');
+  background-image: url('../assets/hill.png');
   background-size: cover;
 }
 
 .desert {
-  background-image: url('C:/Users/noahv/Downloads/desert.png');
+  background-image: url('../assets/desert.png');
   background-size: cover;
 }
 
