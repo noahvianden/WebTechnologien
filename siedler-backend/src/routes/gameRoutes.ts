@@ -7,15 +7,15 @@ const router = express.Router();
 router.get('/getAll', getGames);
 
 // Route zum Abrufen eines bestimmten Spiels
-router.get('/getGame', getGameById);
+router.get('/:id', getGameById);
 
 // Route zum Erstellen eines neuen Spiels
 router.post('/add', createGame);
 
 // Route zum Aktualisieren eines Spiels
-router.put('/updateGame', updateGame);
+router.put('/:id', updateGame);
 
 // Route zum Löschen eines Spiels
-router.delete('/deleteGame', deleteGame);
+router.delete('/:id', deleteGame);
 
 export default router;

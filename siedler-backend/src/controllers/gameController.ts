@@ -16,12 +16,9 @@ export const getGames = async (req: Request, res: Response) => {
 // Controller-Funktion zum Abrufen eines bestimmten Spiels
 export const getGameById = async (req: Request, res: Response) => {
 
-    console.log(req.body);
-    
-
     try {
       // Abrufen der Spiel-ID aus den Routenparametern
-      const { id } = req.body;
+      const { id } = req.params;
   
       // Suchen des Spiels in der Datenbank anhand der ID
       const game = await Game.findById(id);
@@ -61,8 +58,10 @@ export const createGame = async (req: Request, res: Response) => {
 export const updateGame = async (req: Request, res: Response) => {
   try {
 
+    const { id } = req.params
+
     // Extrahieren der aktualisierten Informationen aus dem Anforderungskörper
-    const { id, name, description } = req.body;
+    const { name, description } = req.body;
 
     // Suchen und Aktualisieren des Spiels in der Datenbank anhand der ID
     const updatedGame = await Game.findByIdAndUpdate(id, { name, description }, { new: true });

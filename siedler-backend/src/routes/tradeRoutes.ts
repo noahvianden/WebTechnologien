@@ -1,11 +1,16 @@
-// routes/tradeRoutes.ts
+// tradeRoutes.ts
 
 import express from 'express';
-import { initiateTrade } from '../controllers/tradeController';
+import * as tradeController from '../controllers/tradeController';
 
 const router = express.Router();
 
 // Route zum Initiieren eines Handels
-router.post('/:gameId/trades', initiateTrade);
+router.post('/initiate', tradeController.initiateTrade);
+
+// Weitere Routen für andere Funktionen im tradeController hinzufügen
+router.post('/accept', tradeController.acceptTrade);
+router.post('/reject', tradeController.rejectTrade);
+router.post('/getAll', tradeController.getTradeHistory);
 
 export default router;
