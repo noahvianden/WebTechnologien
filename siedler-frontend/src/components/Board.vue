@@ -76,7 +76,7 @@
   --board-width: 600px;
   --board-height: 600px;
   position: absolute;
-  top: 20%;
+  top: 30%;
   left: 40%;
   transform: translate(-50%, -50%);
   width: var(--board-width);
@@ -85,7 +85,7 @@
   
   /* Stil für die Hexagons */
 .hexagon {
-  --hexagon-width: 130px; /* Breite eines Hexagons */
+  --hexagon-width: 180px; /* Breite eines Hexagons */
   --hexagon-height: calc(var(--hexagon-width) * 1.1547); /* Höhe eines Hexagons */
   width: var(--hexagon-width);
   height: var(--hexagon-height);
@@ -114,7 +114,7 @@
   background-image: url('../assets/field.png');
   background-size: cover;
 }
-
+    
 .hill {
   background-image: url('../assets/hill.png');
   background-size: cover;
