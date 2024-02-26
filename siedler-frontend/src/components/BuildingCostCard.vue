@@ -16,8 +16,8 @@
     padding: 10px; /* Innenabstand */
     text-align: center; /* Zentrierte Ausrichtung */
     position: fixed; /* Fixierte Positionierung */
-    top: 55%; /* Positionierung am oberen Rand */
-    left: 82%; /* Positionierung am linken Rand */
+    bottom: 5%; /* Positionierung am oberen Rand */
+    right: 3%; /* Positionierung am linken Rand */
     width: 290px;
     height: 380px
   }
