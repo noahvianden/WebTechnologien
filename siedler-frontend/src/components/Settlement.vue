@@ -19,7 +19,7 @@
     background-size: cover;
     padding: 10px; /* Innenabstand */
     text-align: center; /* Zentrierte Ausrichtung */
-    position: fixed; /* Fixierte Positionierung */
+    position: relative; /* Fixierte Positionierung */
     top: 32%; /* Positionierung am oberen Rand */
     left: 38.5%; /* Positionierung am linken Rand */
     width: var(--settlement-width); /* Breite des Status-Tabs */

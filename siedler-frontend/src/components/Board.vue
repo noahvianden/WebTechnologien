@@ -1,18 +1,25 @@
 <template>
-    <div class="game-board">
-        <!-- Hexagons für das Spielbrett -->
-        <div
-            v-for="(hexagon, index) in hexagons"
-            :key="index"
-            class="hexagon"
-            :class="hexagon.resource"
-            :style="hexagon.style"
-        >
-            <!-- Anzeige der Ressource oder Nummer (falls vorhanden) -->
-            <span v-if="hexagon.resource !== 'desert'">{{ hexagon.resource }}</span>
-            <span v-else class="desert-tile"></span>
-        </div>
+  <div class="game-board">
+    <!-- Hexagons für das Spielbrett -->
+    <div
+      v-for="(hexagon, index) in hexagons"
+      :key="index"
+      class="hexagon"
+      :class="hexagon.resource"
+      :style="hexagon.style"
+    >
+      <!-- Drop-Zonen für die Ecken des Hexagons -->
+      <div
+        v-for="corner in hexagonCorners"
+        :key="corner.id"
+        class="drop-zone"
+        :style="corner.style"
+        @dragover.prevent
+        @drop="dropItem"
+      >
+      </div>
     </div>
+  </div>
 </template>
   
   <script>
@@ -65,14 +72,27 @@
           { id: 19, resource: "pasture", style: {     top: "calc(((var(--board-height) + var(--hexagon-height)) / 2) + var(--hexagon-height) * 1.5)", 
                                                     left: "calc(((var(--board-width) + var(--hexagon-width)) / 2) + var(--hexagon-width))" } },
         ],
+      hexagonCorners: [
+        { id: 1, style: { top: '0%', left: '45%' } }, 
+        { id: 2, style: { top: '20%', left: '0%' } },
+        { id: 3, style: { top: '70%', left: '0%' } },
+        { id: 4, style: { top: '90%', left: '45%' } },
+        { id: 5, style: { top: '70%', left: '90%' } },
+        { id: 6, style: { top: '20%', left: '90%' } }
+        ]
       };
     },
+    methods: {
+    dropItem(event) {
+      console.log(event)
+    }
+  }
   };
   </script>
   
   <style scoped>
-  /* Stil für das Spielbrett */
-  .game-board {
+/* Stil für das Spielbrett */
+.game-board {
   --board-width: 600px;
   --board-height: 600px;
   position: absolute;
@@ -82,8 +102,8 @@
   width: var(--board-width);
   height: var(--board-height);
 }
-  
-  /* Stil für die Hexagons */
+
+/* Stil für die Hexagons */
 .hexagon {
   --hexagon-width: 180px; /* Breite eines Hexagons */
   --hexagon-height: calc(var(--hexagon-width) * 1.1547); /* Höhe eines Hexagons */
@@ -94,6 +114,14 @@
   position: absolute;
 }
 
+/* Stil für die Drop-Zonen */
+.drop-zone {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
 /* Stil für die verschiedenen Ressourcentypen */
 .mountain {
   background-image: url('../assets/mountain.png');

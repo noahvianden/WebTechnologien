@@ -24,6 +24,7 @@
     <div class="hand-title">
       <h3>Development Cards</h3>
     </div>
+    
     <div class="development-cards">
       <DevelopmentCard
         v-for="(type, index) in developmentCardTypes"
@@ -33,6 +34,7 @@
         @enlarge="handleEnlarge"
       />
     </div>
+    <DragDrop />
     <div class="bottom-bar">
       <div class="bottom-bar-item">
         <input type="text" v-model="settlements" class="bottom-bar-count" disabled>
@@ -52,11 +54,13 @@
 
 <script>
 import DevelopmentCard from '@/components/DevelopmentCard.vue';
+import DragDrop from '@/components/DragDrop.vue'; // Importieren Sie die DragDrop-Komponente
 
 export default {
   name: 'PlayerDashboard',
   components: {
-    DevelopmentCard
+    DevelopmentCard,
+    DragDrop // Registrieren Sie die DragDrop-Komponente
   },
   data() {
     return {
@@ -99,7 +103,7 @@ export default {
   border-radius: 10px;
   width: 20%;
   height: 80%;
-  margin-top: 4%;
+  margin-top: 0%;
   margin-left: 2%;
 }
 
@@ -253,5 +257,6 @@ export default {
   font-weight: bold;
   color: black;
   text-align: center;
+  margin-top: 10px;
 }
 </style>

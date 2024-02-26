@@ -7,6 +7,7 @@
     <StatusTab />
     <PlayerDashboard />
     <Dice />
+    <DragDrop />
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import SettlementPiece from './components/Settlement.vue';
 import BuildingCostCard from './components/BuildingCostCard.vue';
 import PlayerDashboard from './components/PlayerDashboard.vue';
 import Dice from './components/Dice.vue';
+import DragDrop from './components/DragDrop';
 
 export default {
   name: 'App',
@@ -27,6 +29,7 @@ export default {
     BuildingCostCard,
     PlayerDashboard,
     Dice,
+    DragDrop
   },
   data() {
     return {
