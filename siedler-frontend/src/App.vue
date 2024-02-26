@@ -18,7 +18,6 @@ import BuildingCostCard from './components/BuildingCostCard.vue';
 import PlayerDashboard from './components/PlayerDashboard.vue';
 import Dice from './components/Dice.vue';
 
-
 export default {
   name: 'App',
   components: {
@@ -27,11 +26,11 @@ export default {
     SettlementPiece,
     BuildingCostCard,
     PlayerDashboard,
-    Dice
+    Dice,
   },
   data() {
     return {
-      gameStatus: "Spiel läuft...", // Beispiel für eine dynamische Statusinformation
+      gameStatus: "Spiel läuft...",
     };
   }
 }

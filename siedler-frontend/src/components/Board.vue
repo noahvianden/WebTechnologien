@@ -76,7 +76,7 @@
   --board-width: 600px;
   --board-height: 600px;
   position: absolute;
-  top: 30%;
+  top: 25%;
   left: 40%;
   transform: translate(-50%, -50%);
   width: var(--board-width);

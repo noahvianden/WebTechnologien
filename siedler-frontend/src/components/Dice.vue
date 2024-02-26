@@ -36,7 +36,7 @@
   .dice-container {
     position: fixed;
     top: 10%;
-    right: 20%;
+    right: 30%;
     display: flex;
     flex-direction: row;
   }

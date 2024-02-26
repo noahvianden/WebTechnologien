@@ -8,6 +8,7 @@
     </div>
     <div class="victory-points">
       <img src="../assets/victory-points-icon.png" alt="Victory Points" class="vp-icon">
+      <input type="text" v-model="victoryPoints" class="vp-count-input" disabled>
     </div>
     <div class="hand-title">
       <h3>Your Hand</h3>
@@ -32,6 +33,20 @@
         @enlarge="handleEnlarge"
       />
     </div>
+    <div class="bottom-bar">
+      <div class="bottom-bar-item">
+        <input type="text" v-model="settlements" class="bottom-bar-count" disabled>
+        <img src="../assets/settlement.png" alt="Settlement" class="bottom-bar-icon">
+      </div>
+      <div class="bottom-bar-item">
+        <input type="text" v-model="cities" class="bottom-bar-count" disabled>
+        <img src="../assets/city.png" alt="City" class="bottom-bar-icon">
+      </div>
+      <div class="bottom-bar-item">
+        <input type="text" v-model="roads" class="bottom-bar-count" disabled>
+        <img src="../assets/road.png" alt="Road" class="bottom-bar-icon">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,13 +68,17 @@ export default {
         { class: 'resource ore', count: 0 }
       ],
       developmentCardTypes: ['chapel', 'knight', 'library', 'market', 'monopoly', 'palace', 'road-building', 'year-of-plenty'],
-      enlargedCardType: null 
+      enlargedCardType: null,
+      victoryPoints: 0, // Hier wird die Anzahl der Siegpunkte gespeichert
+      settlements: 0,
+      cities: 0,
+      roads: 0
     };
   },
   methods: {
     handleEnlarge(type) {
-      console.log(type)
-      console.log(this.data)
+      console.log(type);
+      console.log(this.data);
       if (this.enlargedCardType === type) {
         this.enlargedCardType = null; 
       } else {
@@ -85,6 +104,8 @@ export default {
 }
 
 .victory-points {
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -93,9 +114,21 @@ export default {
   height: auto;
 }
 
+.vp-count-input {
+  width: 10px;
+  margin-left: 40px;
+  border: none;
+  background-color: transparent;
+  pointer-events: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
 .resources {
   margin-bottom: 20px;
 }
+
 .resource-container {
   display: flex;
   align-items: center;
@@ -104,7 +137,7 @@ export default {
 .resource-count-input {
   width: 10px; /* Breite auf 20px (etwa 1 Zeichen) begrenzen */
   margin-bottom: 5px;
-  margin-left: 10px;
+  margin-left: 40px;
   border: none; /* Kein Rahmen */
   background-color: transparent; /* Transparenter Hintergrund */
   pointer-events: none; /* Verhindert, dass das Feld bearbeitet werden kann */
@@ -155,5 +188,70 @@ export default {
 .development-card-image {
   width: auto; /* Automatische Breite basierend auf der Höhe */
   height: 100%;
+}
+
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.action-icon {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.action-text-input {
+  width: 100px; /* Breite des Textfelds anpassen */
+  margin-left: 10px;
+  border: none;
+  background-color: transparent;
+  pointer-events: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+.bottom-bar {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.5);
+  justify-content: center;
+  position: absolute;
+  bottom: 5%;
+  left: 35%;
+  right: 100px;
+  width: 600px;
+}
+
+.bottom-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.bottom-bar-icon {
+  width: 100px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.bottom-bar-count {
+  width: 20px;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  pointer-events: none;
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
 }
 </style>
