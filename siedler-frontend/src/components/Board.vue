@@ -1,5 +1,5 @@
 <template>
-  <div class="game-board">
+  <div class="game-board" @drop="dropItem" @dragover.prevent>
     <!-- Hexagons für das Spielbrett -->
     <div
       v-for="(hexagon, index) in hexagons"
@@ -14,17 +14,34 @@
         :key="corner.id"
         class="drop-zone"
         :style="corner.style"
-        @dragover.prevent
-        @drop="dropItem"
+        :data-corner-id="corner.id"
       >
       </div>
     </div>
+
+    <!-- Anzeige der Siedlungen -->
+    <Settlement v-if="showSettlements" :position="dropPosition" />
+
+    <!-- Anzeige der Städte -->
+    <City v-if="showCities" :position="dropPosition" />
+
+    <!-- Anzeige der Straßen -->
+    <Road v-if="showRoads" :position="dropPosition" />
   </div>
 </template>
-  
-  <script>
+
+<script>
+  import Settlement from '@/components/Settlement.vue';
+import City from '@/components/City.vue';
+import Road from '@/components/Road.vue';
+
   export default {
     name: "GameBoard",
+    components: {
+    Settlement,
+    City,
+    Road
+    },
     data() {
       return {
         // Liste der Hexagons mit den verschiedenen Ressourcen und Positionen
@@ -79,16 +96,46 @@
         { id: 4, style: { top: '90%', left: '45%' } },
         { id: 5, style: { top: '70%', left: '90%' } },
         { id: 6, style: { top: '20%', left: '90%' } }
-        ]
+        ],
+        showSettlements: false,
+      showCities: false,
+      showRoads: false,
+      dropPosition: { x: 0, y: 0 }
       };
     },
     methods: {
     dropItem(event) {
-      console.log(event)
+      event.preventDefault();
+      const componentType = event.dataTransfer.getData('text');
+
+      // Setzen Sie das aktive Element basierend auf dem gezogenen Typ und aktualisieren Sie die Position
+      if (componentType === 'Settlement') {
+        this.showSettlements = true;
+        this.showCities = false;
+        this.showRoads = false;
+        this.updateDropPosition(event);
+      } else if (componentType === 'City') {
+        this.showSettlements = false;
+        this.showCities = true;
+        this.showRoads = false;
+        this.updateDropPosition(event);
+      } else if (componentType === 'Road') {
+        this.showSettlements = false;
+        this.showCities = false;
+        this.showRoads = true;
+        this.updateDropPosition(event);
+      }
+    },
+    updateDropPosition(event) {
+      // Aktualisieren Sie die Position auf die globale Position des Mauszeigers
+      this.dropPosition = {
+        x: event.clientX,
+        y: event.clientY
+      };
     }
-  }
-  };
-  </script>
+  },
+};
+</script>
   
   <style scoped>
 /* Stil für das Spielbrett */

@@ -34,17 +34,16 @@
         @enlarge="handleEnlarge"
       />
     </div>
-    <DragDrop />
     <div class="bottom-bar">
-      <div class="bottom-bar-item">
+      <div class="bottom-bar-item" @dragstart="dragStart($event, 'Settlement')" draggable="true">
         <input type="text" v-model="settlements" class="bottom-bar-count" disabled>
         <img src="../assets/settlement.png" alt="Settlement" class="bottom-bar-icon">
       </div>
-      <div class="bottom-bar-item">
+      <div class="bottom-bar-item" @dragstart="dragStart($event, 'City')" draggable="true">
         <input type="text" v-model="cities" class="bottom-bar-count" disabled>
         <img src="../assets/city.png" alt="City" class="bottom-bar-icon">
       </div>
-      <div class="bottom-bar-item">
+      <div class="bottom-bar-item" @dragstart="dragStart($event, 'Road')" draggable="true">
         <input type="text" v-model="roads" class="bottom-bar-count" disabled>
         <img src="../assets/road.png" alt="Road" class="bottom-bar-icon">
       </div>
@@ -54,13 +53,11 @@
 
 <script>
 import DevelopmentCard from '@/components/DevelopmentCard.vue';
-import DragDrop from '@/components/DragDrop.vue'; // Importieren Sie die DragDrop-Komponente
 
 export default {
   name: 'PlayerDashboard',
   components: {
     DevelopmentCard,
-    DragDrop // Registrieren Sie die DragDrop-Komponente
   },
   data() {
     return {
@@ -74,20 +71,22 @@ export default {
       developmentCardTypes: ['chapel', 'knight', 'library', 'market', 'monopoly', 'palace', 'road-building', 'year-of-plenty'],
       enlargedCardType: null,
       victoryPoints: 0, // Hier wird die Anzahl der Siegpunkte gespeichert
-      settlements: 0,
+      settlements: 0, 
       cities: 0,
       roads: 0
     };
   },
   methods: {
     handleEnlarge(type) {
-      console.log(type);
-      console.log(this.data);
       if (this.enlargedCardType === type) {
         this.enlargedCardType = null; 
       } else {
         this.enlargedCardType = type; 
       }
+    },
+    dragStart(event, type) {
+      console.log('dragStart method called');
+      event.dataTransfer.setData('text', type);
     }
   }
 };
