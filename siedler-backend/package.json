@@ -1,14 +1,18 @@
+// package.json
+
 {
   "scripts": {
-    "start": "ts-node -P config/tsconfig.json src/server.ts"
+    "start": "ts-node -P config/tsconfig.json src/server.ts" // Startskript für die Ausführung des Servers
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^8.1.3",
-    "ws": "^8.16.0"
+    "express": "^4.18.2", // Framework für das Erstellen von Webanwendungen mit Node.js
+    "mongoose": "^8.1.3", // MongoDB ODM (Object Data Modeling) für Node.js
+    "ts-node": "^10.9.2", // Ausführung von TypeScript-Dateien ohne vorherige Kompilierung
+    "ws": "^8.16.0" // WebSocket-Bibliothek für Node.js
   },
   "devDependencies": {
-    "@types/mongoose": "^5.11.97",
-    "@types/ws": "^8.5.10"
+    "@types/express": "^4.17.21", // TypeScript-Typdefinitionen für Express
+    "@types/mongoose": "^5.11.97", // TypeScript-Typdefinitionen für Mongoose
+    "@types/ws": "^8.5.10" // TypeScript-Typdefinitionen für WebSocket
   }
 }

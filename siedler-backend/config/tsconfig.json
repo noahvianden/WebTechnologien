@@ -1,9 +1,11 @@
+// tsconfig.json
+
 {
   "compilerOptions": {
-    "esModuleInterop": true,
-    "target": "ESNext",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "strict": true
+    "esModuleInterop": true,   // Erlaube Interoperabilität mit ES-Modulen
+    "target": "ESNext",        // Ziel: ECMAScript Next (neueste Version)
+    "module": "commonjs",      // Ausgabeformat: CommonJS-Module
+    "outDir": "./dist",        // Ausgabeverzeichnis für kompilierte Dateien
+    "strict": true             // Aktiviere strenge Typenprüfoptionen
   }
 }

@@ -37,38 +37,4 @@ wss.on('connection', (ws) => {
   });
 });
 
-// MongoDB-Verbindung
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/siedler', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log('Erfolgreich mit der MongoDB-Datenbank verbunden');
-  })
-  .catch((error: Error) => {
-    console.error('Fehler beim Verbinden mit der MongoDB-Datenbank:', error);
-  });
-
-// Middleware hinzufügen
-app.use(express.json());
-
-// Routen hinzufügen
-app.use('/api/auth', authRoutes)
-app.use('/api/games', gameRoutes);
-app.use('/api/players', playerRoutes);
-app.use('/api/moves', moveRoutes);
-app.use('/api/trades', tradeRoutes);
-app.use('/api/gameManagement', gameManagementRoutes)
-
-// Statische Dateien für die Vue.js-App bereitstellen
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Standard-GET-Endpunkt für '/'
-// GET-Endpunkt für die Login-Seite
-app.get('/login', (req, res) => {
-  res.render('login'); // Zeigt die Login-Seite an
-});
-
-
-// Starten Sie den HTTP-Server
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Fortsetzung von server.ts folgt auf der nächsten Seite

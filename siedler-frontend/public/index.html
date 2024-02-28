@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Vue App</title>
+</head>
+<body>
+    <!-- Hier wird Ihre Vue-Anwendung gerendert -->
     <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+    <!-- Einbindung der Vue.js-Bibliothek -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- Einbindung des Vue Router, falls verwendet -->
+    <script src="https://unpkg.com/vue-router@3"></script>
+    <!-- Einbindung Ihrer Vue-Anwendung -->
+    <script src="main.js"></script> <!-- Stellen Sie sicher, dass der Pfad zur app.js-Datei korrekt ist -->
+</body>
 </html>

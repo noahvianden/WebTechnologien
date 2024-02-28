@@ -1,8 +1,8 @@
 <template>
   <div id="app">
+  <router-view></router-view>
     <!-- Header -->
     <Board />
-    <SettlementPiece />
     <BuildingCostCard />
     <StatusTab />
     <PlayerDashboard />
@@ -14,7 +14,6 @@
 <script>
 import StatusTab from "./components/StatusTab.vue";
 import Board from './components/Board.vue';
-import SettlementPiece from './components/Settlement.vue';
 import BuildingCostCard from './components/BuildingCostCard.vue';
 import PlayerDashboard from './components/PlayerDashboard.vue';
 import Dice from './components/Dice.vue';
@@ -25,7 +24,6 @@ export default {
   components: {
     Board,
     StatusTab,
-    SettlementPiece,
     BuildingCostCard,
     PlayerDashboard,
     Dice,
