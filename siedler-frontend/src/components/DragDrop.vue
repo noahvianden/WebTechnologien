@@ -50,16 +50,4 @@ export default {
 .drag-item {
   cursor: pointer;
 }
-
-.drop-zone {
-  width: 100px;
-  height: 100px;
-  border: 0px dashed #ccc;
-  background-color: rgba(255, 255, 255, 1);
-  visibility: visible;
-}
-
-.drop-zone.visible {
-  visibility: visible;
-}
 </style>
